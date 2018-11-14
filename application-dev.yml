@@ -1,0 +1,53 @@
+info:
+  name: TX Core services
+  
+mq:
+   queuemanager: CITISCREEN_QM.DEV_TX2
+   host: vm-1616-c2e4.nam.nsroot.net
+   port: 42002
+   channel: CSTX.SVRCONN
+   incomingqueue: SP.REQUEST.LISTEN.L
+   outgoingqueue: GI.REQUEST.LISTEN.SIT1
+   timeout: 3000
+   path : C:\temp\
+   transactionfilename: transactions-dev.txt
+   
+hystrixdemo:
+            sleep: 100
+
+transaction:
+           cacheRefresh: 5000
+           
+
+SyntheticTransaction :
+              filterRoot: files/ 
+              cacheRefresh: 5000   
+              
+management:
+        security:
+          enabled: false
+  
+#cronexpression: 0 0/01 * * * ?
+#restUrl: https://ctoscpswap1d.nam.nsroot.net:13443/scp/rest-apis/sewa-cstx
+touchFilePath: /cstxdv/REJECTED_TXN
+server: SyntheticTransactionService
+module: SYNTHETIC
+environment: DEV
+timeoutInMilliseconds: 3000
+
+mail:
+ host: localhost
+ port: 25
+
+spring:
+ jpa:
+  database-platform: org.hibernate.dialect.Oracle10gDialect
+  show-sql: false
+ datasource:
+  url: jdbc:oracle:thin:@vm-50d8-a1cf.nam.nsroot.net:1522/CSTXDBD
+  username: citi_gfts_tx
+  #password: ENC(arAro/GyQF89dDI0gCCk9Z9K16UDC0Oz)
+  password: gfts_dev
+  driver-class-name: oracle.jdbc.OracleDriver
+
+
